@@ -22,7 +22,8 @@
     PostsRouter.prototype.list = function() {
       return new PostsListView({
         el: $('body'),
-        model: app.user
+        model: app.user,
+        collection: app.posts
       });
     };
     return PostsRouter;

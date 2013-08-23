@@ -9,6 +9,7 @@ class PostsRouter extends Backbone.Router
     new PostsListView { 
       el : $('body')
       model : app.user
+      collection : app.posts
     }
 
 @PostsRouter = PostsRouter

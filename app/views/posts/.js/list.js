@@ -16,7 +16,8 @@
     PostsListView.prototype.initialize = function() {
       this.template = $templates.postsList;
       this.render();
-      return app.users.on('change', this.render);
+      app.users.on('add', this.render);
+      return app.posts.on('add', this.render);
     };
     PostsListView.prototype.events = {
       'keydown .new-post textarea': 'onKeydown',
@@ -24,7 +25,6 @@
       'submit .search': 'onSubmitSearch'
     };
     PostsListView.prototype.render = function() {
-      this.collection = app.getPosts();
       return this.$el.html(this.template(this));
     };
     PostsListView.prototype.onKeydown = function(e) {
@@ -39,9 +39,11 @@
       post = new Post({
         id: guid(),
         content: textarea.val(),
-        created_at: new Date().toISOString()
+        created_at: new Date().toISOString(),
+        user: app.user.get('name')
       });
       app.user.newPost(post);
+      app.posts.add(post);
       app.postModel(post);
       return this.render();
     };

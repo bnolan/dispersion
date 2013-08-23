@@ -14,6 +14,11 @@
     }
     __extends(UserCollection, Backbone.Collection);
     UserCollection.prototype.model = User;
+    UserCollection.prototype.getByName = function(name) {
+      return this.find(function(user) {
+        return user.get('name') === name;
+      });
+    };
     return UserCollection;
   })();
   this.UserCollection = UserCollection;

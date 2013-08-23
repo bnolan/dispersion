@@ -41,7 +41,7 @@ this.$templates.postsList = function (__obj) {
   }
   (function() {
     (function() {
-      var post, user, _i, _j, _len, _len2, _ref, _ref2;
+      var post, user, _i, _j, _len, _len1, _ref, _ref1;
     
       __out.push('<!--\n\n  Your eco template goes here...\n  \n-->\n\n<header>\n  <div class="inner">\n    <h1>s</h1>\n\n    <form action="#" class="search">\n      <input placeholder="Search for a username here" />\n    </form>\n    \n    <span class="user-name">\n      ');
     
@@ -59,9 +59,9 @@ this.$templates.postsList = function (__obj) {
     
       __out.push('\n  </p>\n  \n  <div>\n    ');
     
-      _ref2 = this.collection.models;
-      for (_j = 0, _len2 = _ref2.length; _j < _len2; _j++) {
-        post = _ref2[_j];
+      _ref1 = this.collection.models;
+      for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
+        post = _ref1[_j];
         __out.push('\n      <div class="post">\n        <img src="images/avatar.png" class="avatar" />\n      \n        <h3 class="user">\n          ');
         __out.push(__sanitize(post.getUser().get('name')));
         __out.push('\n        </h3>\n      \n        <p>\n          ');

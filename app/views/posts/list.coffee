@@ -4,7 +4,8 @@ class PostsListView extends Backbone.View
 
     @render()
     
-    app.users.on 'change', @render
+    app.users.on 'add', @render
+    app.posts.on 'add', @render
 
   events: {
     'keydown .new-post textarea' : 'onKeydown'
@@ -13,7 +14,6 @@ class PostsListView extends Backbone.View
   }
   
   render: =>
-    @collection = app.getPosts()
     @$el.html @template(this)
 
   onKeydown: (e) ->
@@ -28,9 +28,11 @@ class PostsListView extends Backbone.View
       id : guid()
       content : textarea.val()
       created_at : new Date().toISOString()
+      user : app.user.get('name')
     }
     
     app.user.newPost(post)
+    app.posts.add(post)
     app.postModel(post)
 
     @render()

@@ -8,4 +8,7 @@ class PostCollection extends Backbone.Collection
     @map (post) ->
       post.toAttributes()
       
+  save: ->
+    # ...
+    
 @PostCollection = PostCollection

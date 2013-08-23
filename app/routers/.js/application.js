@@ -6,6 +6,7 @@
       this.onConnection = __bind(this.onConnection, this);;      this.user = new User(this.parseUser());
       this.user.save();
       this.users = new UserCollection;
+      this.posts = new PostCollection;
       this.peer = new Peer(this.user.get('name'), {
         key: this.peerKey(),
         debug: true
@@ -14,9 +15,15 @@
       this.inboundConnections = {};
       this.outboundConnections = {};
     }
+    Application.prototype.resetSession = function() {
+      return delete localStorage['user'];
+    };
     Application.prototype.onConnection = function(conn) {
       var message;
       this.inboundConnections[conn.peer] = conn;
+      this.users.add(new User({
+        name: conn.peer
+      }));
       message = JSON.stringify({
         model: 'User',
         attributes: app.user.toAttributes()
@@ -30,9 +37,12 @@
       var conn;
       conn = app.peer.connect(name);
       this.outboundConnections[name] = conn;
+      this.users.add(new User({
+        name: name
+      }));
       conn.on('open', function() {});
       return conn.on('data', __bind(function(data) {
-        var obj;
+        var obj, post;
         obj = {};
         try {
           obj = JSON.parse(data);
@@ -41,7 +51,9 @@
           return;
         }
         if (obj.model === 'Post') {
-          app.user.newPost(new Post(obj.attributes));
+          post = new Post(obj.attributes);
+          this.users.getByName(post.get('user')).newPost(post);
+          this.posts.add(post);
           return;
         }
         if (obj.model === 'User') {
@@ -69,41 +81,22 @@
       return "uazd6lgkwi3yds4i";
     };
     Application.prototype.parseUser = function() {
+      var name;
       if (localStorage['user']) {
         return JSON.parse(localStorage['user']);
       } else {
+        name = prompt("Please enter a username, no spaces");
         return {
-          name: prompt("Please enter a username, no spaces"),
+          name: name,
           posts: [
             {
-              content: 'something else',
-              created_at: '2013-05-25T12:00:00'
-            }, {
               content: 'hello world',
-              created_at: '2013-04-11T12:00:00'
+              created_at: new Date().toISOString(),
+              user: name
             }
           ]
         };
       }
-    };
-    Application.prototype.getPosts = function() {
-      var post, posts, user, _i, _j, _k, _len, _len2, _len3, _ref, _ref2, _ref3;
-      posts = new PostCollection;
-      _ref = this.user.getPosts().models;
-      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-        post = _ref[_i];
-        posts.add(post);
-      }
-      _ref2 = this.users.models;
-      for (_j = 0, _len2 = _ref2.length; _j < _len2; _j++) {
-        user = _ref2[_j];
-        _ref3 = user.getPosts().models;
-        for (_k = 0, _len3 = _ref3.length; _k < _len3; _k++) {
-          post = _ref3[_k];
-          posts.add(post);
-        }
-      }
-      return posts;
     };
     Application.prototype.start = function() {
       console.log('App started');

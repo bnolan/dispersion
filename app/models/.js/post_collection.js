@@ -22,6 +22,7 @@
         return post.toAttributes();
       });
     };
+    PostCollection.prototype.save = function() {};
     return PostCollection;
   })();
   this.PostCollection = PostCollection;
