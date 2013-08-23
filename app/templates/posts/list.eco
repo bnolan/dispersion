@@ -1,0 +1,62 @@
+<!--
+
+  Your eco template goes here...
+  
+-->
+
+<header>
+  <div class="inner">
+    <h1>s</h1>
+
+    <form action="#" class="search">
+      <input placeholder="Search for a username here" />
+    </form>
+    
+    <span class="user-name">
+      <%= @model.get('name') %>
+    </span>
+  </div>
+</header>
+
+<section>
+  
+  <form action="#" class="new-post">
+    <label>Update Status</label>
+    
+    <span class="chevron"></span>
+    
+    <textarea placeholder="What's on your mind?"></textarea>
+  </form>
+
+  <p>
+    Friends:
+    
+    <% for user in app.users.models: %>
+      <%= user.get('name') %>
+    <% end %>
+  </p>
+  
+  <div>
+    <% for post in @collection.models: %>
+      <div class="post">
+        <img src="images/avatar.png" class="avatar" />
+      
+        <h3 class="user">
+          <%= post.getUser().get('name') %>
+        </h3>
+      
+        <p>
+          <%= post.get('content') %>
+        </p>
+
+        <span class="meta">
+          <a href="#">Like</a> &middot;
+          <a href="#">Comment</a> &middot;
+          <a href="#">Share</a> &middot;
+          <%= post.get('created_at') %>
+        </span>
+      </div>
+    <% end %>
+  </div>
+  
+</section>

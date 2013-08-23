@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en" class="no-js">
+  <title>Skeeted</title>
+  <meta charset="utf-8">
+  <link href='stylesheets/.application.css' media='screen' rel='stylesheet' type='text/css' />
+  <script src='lib/jquery.js' type='text/javascript'></script>
+  <script src='lib/underscore.js' type='text/javascript'></script>
+  <script src='lib/backbone.js' type='text/javascript'></script>
+  <script src='lib/helpers.js' type='text/javascript'></script>
+  <script src='app/routers/.js/application.js' type='text/javascript'></script>
+  <script src='app/routers/.js/posts_router.js' type='text/javascript'></script>
+  <script src='app/views/posts/.js/list.js' type='text/javascript'></script>
+  <script src='app/models/.js/comment.js' type='text/javascript'></script>
+  <script src='app/models/.js/comment_collection.js' type='text/javascript'></script>
+  <script src='app/models/.js/post.js' type='text/javascript'></script>
+  <script src='app/models/.js/post_collection.js' type='text/javascript'></script>
+  <script src='app/models/.js/user.js' type='text/javascript'></script>
+  <script src='app/models/.js/user_collection.js' type='text/javascript'></script>
+  <script src='app/templates/posts/.js/list.js' type='text/javascript'></script>
+  <script src="http://cdn.peerjs.com/0/peer.min.js"></script>
+</head>
+
+<body>
+  <script>
+    window.app = new Application;
+
+    $(document).ready(function(){
+      app.start();
+    });
+  </script>
+</body>
+</html>

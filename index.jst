@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en" class="no-js">
+  <title><%= project.name().capitalize() %></title>
+  <meta charset="utf-8">
+  <%= project.stylesheetIncludes() %>
+  <%= project.scriptIncludes() %>
+  <script src="http://cdn.peerjs.com/0/peer.min.js"></script>
+</head>
+
+<body>
+  <script>
+    window.app = new Application;
+
+    $(document).ready(function(){
+      app.start();
+    });
+  </script>
+</body>
+</html>
