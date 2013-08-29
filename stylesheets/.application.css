@@ -55,6 +55,9 @@ header .user-name {
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
   line-height: 45px;
 }
+.ui-autocomplete-loading {
+  background: #ffffff url('/images/spinner.gif') right center no-repeat;
+}
 .inner,
 .wrapper {
   max-width: 600px;

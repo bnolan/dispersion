@@ -80,6 +80,9 @@
     Application.prototype.peerKey = function() {
       return "uazd6lgkwi3yds4i";
     };
+    Application.prototype.getBrokerUrl = function() {
+      return "http://example.com";
+    };
     Application.prototype.parseUser = function() {
       var name;
       if (localStorage['user']) {

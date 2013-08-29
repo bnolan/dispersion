@@ -19,6 +19,23 @@ class PostsListView extends Backbone.View
       # do nothing if they're typing a message, it'll re-render when they post it
     else
       @$el.html @template(this)
+    
+    @addAutocompleter()
+    
+  addAutocompleter: ->
+    @$el.find('.search input').autocomplete {
+      source : (request, response) ->
+        $.ajax {
+          url : app.getBrokerUrl() + "/contacts/search"
+          dataType : "jsonp" # maybe json - since we're gonna support CORs?
+          data : { name : request.term }
+          success: (data) ->
+            response($.map(data.names, (contact) -> { label : contact.name, value : contact.handle }))
+        }
+      minLength : 1
+      select: (event, ui) ->
+        console.log(ui.item)
+    }
 
   onKeydown: (e) ->
     if e.keyCode == 13

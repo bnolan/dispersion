@@ -26,10 +26,36 @@
     };
     PostsListView.prototype.render = function() {
       if (this.$el.find('.new-post textarea').val()) {
-        ;
+        return;
       } else {
-        return this.$el.html(this.template(this));
+        this.$el.html(this.template(this));
       }
+      return this.addAutocompleter();
+    };
+    PostsListView.prototype.addAutocompleter = function() {
+      return this.$el.find('.search input').autocomplete({
+        source: function(request, response) {
+          return $.ajax({
+            url: app.getBrokerUrl() + "/contacts/search",
+            dataType: "jsonp",
+            data: {
+              name: request.term
+            },
+            success: function(data) {
+              return response($.map(data.names, function(contact) {
+                return {
+                  label: contact.name,
+                  value: contact.handle
+                };
+              }));
+            }
+          });
+        },
+        minLength: 1,
+        select: function(event, ui) {
+          return console.log(ui.item);
+        }
+      });
     };
     PostsListView.prototype.onKeydown = function(e) {
       if (e.keyCode === 13) {

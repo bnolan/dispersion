@@ -79,6 +79,10 @@ class Application
   # peer.js key
   peerKey: ->
     "uazd6lgkwi3yds4i"
+  
+  # the authentication and contact search url
+  getBrokerUrl: ->
+    "http://example.com"  
     
   parseUser: ->
     if localStorage['user']
