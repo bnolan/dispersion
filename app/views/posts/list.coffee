@@ -14,7 +14,11 @@ class PostsListView extends Backbone.View
   }
   
   render: =>
-    @$el.html @template(this)
+    if @$el.find('.new-post textarea').val()
+      return
+      # do nothing if they're typing a message, it'll re-render when they post it
+    else
+      @$el.html @template(this)
 
   onKeydown: (e) ->
     if e.keyCode == 13
@@ -30,6 +34,8 @@ class PostsListView extends Backbone.View
       created_at : new Date().toISOString()
       user : app.user.get('name')
     }
+    
+    textarea.val("")
     
     app.user.newPost(post)
     app.posts.add(post)

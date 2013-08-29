@@ -4,6 +4,13 @@ html {
   margin: 0;
   padding: 0;
 }
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: 'Open Sans', serif;
+}
 header {
   background: -webkit-gradient(linear, 0 0, 0 bottom, #666666, #444444);
   background: -moz-linear-gradient(#666666, #444444);
@@ -22,12 +29,13 @@ header h1 {
   border-radius: 2px;
   width: 22px;
   height: 22px;
-  line-height: 22px;
+  line-height: 16px;
   text-align: center;
-  font-size: 1em;
+  font-size: 1.5em;
   position: relative;
   top: 10px;
   float: left;
+  cursor: pointer;
 }
 header form {
   padding: 10px 0 0 5px;
@@ -48,9 +56,17 @@ header .user-name {
   line-height: 45px;
 }
 .inner,
-section {
+.wrapper {
   max-width: 600px;
   margin: auto;
+}
+.friends-section {
+  width: 180px;
+  position: absolute;
+  margin-top: 20px;
+}
+.posts-section {
+  margin-left: 200px;
 }
 .post:first-child {
   border-top: 1px solid #ccc;
@@ -61,7 +77,7 @@ section {
   position: relative;
   border-bottom: 1px solid #ccc;
 }
-.post h3 {
+.post h4 {
   margin: 0;
   padding: 0;
   font-size: 1.1em;
@@ -86,9 +102,10 @@ section {
 }
 .new-post label {
   display: block;
-  font-size: 0.8em;
+  font-size: 1em;
   color: #333;
   font-weight: bold;
+  font-family: 'Open Sans', sans-serif;
 }
 .new-post .chevron {
   position: relative;
@@ -112,4 +129,23 @@ section {
   box-sizing: border-box;
   resize: none;
   outline: none;
+}
+ul.friends {
+  margin: -10px 0 0 0;
+  padding: 0;
+  border-top: 1px solid #ccc;
+  font-size: 0.8em;
+}
+ul.friends * {
+  margin: 0;
+  padding: 0;
+}
+ul.friends li {
+  list-style: none;
+  border-bottom: 1px solid #ccc;
+  line-height: 25px;
+  padding: 0 10px;
+}
+ul.friends .no-content {
+  color: #999;
 }

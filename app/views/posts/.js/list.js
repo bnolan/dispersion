@@ -25,7 +25,11 @@
       'submit .search': 'onSubmitSearch'
     };
     PostsListView.prototype.render = function() {
-      return this.$el.html(this.template(this));
+      if (this.$el.find('.new-post textarea').val()) {
+        ;
+      } else {
+        return this.$el.html(this.template(this));
+      }
     };
     PostsListView.prototype.onKeydown = function(e) {
       if (e.keyCode === 13) {
@@ -42,6 +46,7 @@
         created_at: new Date().toISOString(),
         user: app.user.get('name')
       });
+      textarea.val("");
       app.user.newPost(post);
       app.posts.add(post);
       app.postModel(post);

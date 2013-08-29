@@ -18,45 +18,54 @@
   </div>
 </header>
 
-<section>
+<div class="wrapper">
+  <section class="friends-section">
+    <h4>
+      Friends
+    </h4>
   
-  <form action="#" class="new-post">
-    <label>Update Status</label>
-    
-    <span class="chevron"></span>
-    
-    <textarea placeholder="What's on your mind?"></textarea>
-  </form>
+    <ul class="friends">
+      <% if app.users.length == 0: %>
+        <li class="no-content">No friends yet</li>
+      <% end %>
 
-  <p>
-    Friends:
-    
-    <% for user in app.users.models: %>
-      <%= user.get('name') %>
-    <% end %>
-  </p>
-  
-  <div>
-    <% for post in @collection.models: %>
-      <div class="post">
-        <img src="images/avatar.png" class="avatar" />
-      
-        <h3 class="user">
-          <%= post.getUser().get('name') %>
-        </h3>
-      
-        <p>
-          <%= post.get('content') %>
-        </p>
+      <% for user in app.users.models: %>
+        <li><%= user.get('name') %></li>
+      <% end %>
+    </ul>
+  </section>
 
-        <span class="meta">
-          <a href="#">Like</a> &middot;
-          <a href="#">Comment</a> &middot;
-          <a href="#">Share</a> &middot;
-          <%= post.get('created_at') %>
-        </span>
-      </div>
-    <% end %>
-  </div>
+  <section class="posts-section">
+    <form action="#" class="new-post">
+      <label>Update Status</label>
+    
+      <span class="chevron"></span>
+    
+      <textarea placeholder="What's on your mind?"></textarea>
+    </form>
+
+    <div>
+      <% for post in @collection.models: %>
+        <div class="post">
+          <img src="images/avatar.png" class="avatar" />
+      
+          <h4 class="user">
+            <%= post.getUser().get('name') %>
+          </h4>
+      
+          <p>
+            <%= post.get('content') %>
+          </p>
+
+          <span class="meta">
+            <a href="#">Like</a> &middot;
+            <a href="#">Comment</a> &middot;
+            <a href="#">Share</a> &middot;
+            <%= post.get('created_at') %>
+          </span>
+        </div>
+      <% end %>
+    </div>
   
-</section>
+  </section>
+</div>
